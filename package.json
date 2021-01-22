@@ -1,0 +1,17 @@
+{
+  "name": "ts2famix",
+  "version": "0.0.1",
+  "description": "Moose importer for TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christopher Fuhrman",
+  "license": "MIT",
+  "dependencies": {
+    "typescript-parser": "^2.6.1"
+  },
+  "devDependencies": {
+    "ts-morph": "^9.1.0"
+  }
+}
