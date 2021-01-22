@@ -1,7 +1,7 @@
 {
-  "name": "ts2famix",
+  "name": "ts2famix-exemple",
   "version": "0.0.1",
-  "description": "Moose importer for TypeScript",
+  "description": "Start of a Moose importer for TypeScript",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "ts-morph": "^9.1.0"
+    "ts-morph": "^9.1.0",
+    "ts-node": "^9.1.1"
   }
 }
