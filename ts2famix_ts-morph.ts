@@ -1,4 +1,5 @@
 import { Project } from "ts-morph";
+// Super documentation : https://ts-morph.com/
 
 const project = new Project();
 
@@ -8,7 +9,7 @@ project.getSourceFiles().forEach(sourceFile => {
     console.log('Source file: ' + sourceFile.getBaseName());
     const hasClasses = sourceFile.getClasses().length > 0;
     const hasInterfaces = sourceFile.getInterfaces().length > 0;
-    
+
     if (hasClasses) {
         console.log('Found classes:');
         sourceFile.getClasses().forEach(clazz => {
@@ -23,12 +24,12 @@ project.getSourceFiles().forEach(sourceFile => {
             }
         });
     }
-    
+
     if (hasInterfaces) {
         console.log('Found interfaces:');
         sourceFile.getInterfaces().forEach(interfaze => {
             console.log('Interface ' + interfaze.getName());
         });
-    }    
+    }
 });
 
