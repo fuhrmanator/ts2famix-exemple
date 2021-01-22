@@ -8,9 +8,7 @@
   },
   "author": "Christopher Fuhrman",
   "license": "MIT",
-  "dependencies": {
-    "typescript-parser": "^2.6.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "ts-morph": "^9.1.0"
   }
