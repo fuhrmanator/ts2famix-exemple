@@ -1,5 +1,5 @@
 import { Project } from "ts-morph";
-import { ClassDeclaration } from "typescript-parser";
+// import { ClassDeclaration } from "typescript-parser";
 
 const project = new Project();
 
