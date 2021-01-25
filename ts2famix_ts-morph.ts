@@ -1,12 +1,25 @@
-import { Project } from "ts-morph";
-// Super documentation : https://ts-morph.com/
+import { ClassDeclaration, Project } from "ts-morph";
+import { Element, MSEDocument } from "./src/MSEDocument";
+
+let id: number = 1;
 
 const project = new Project();
+
+const famixPrefix = "Famix-Java-Entities";
+
+let mseDocument = new MSEDocument(null, famixPrefix);
+
+console.log(mseDocument.toMSE());
 
 project.addSourceFilesAtPaths("sample-ts/**/*.ts");
 
 project.getSourceFiles().forEach(sourceFile => {
+    // sourceFile.forEachChild(node => {
+    //     console.log(node)
+    // });
+
     console.log('Source file: ' + sourceFile.getBaseName());
+
     const hasClasses = sourceFile.getClasses().length > 0;
     const hasInterfaces = sourceFile.getInterfaces().length > 0;
 
@@ -22,6 +35,7 @@ project.getSourceFiles().forEach(sourceFile => {
                     })
                 })
             }
+            addClassToMSE(clazz, mseDocument);
         });
     }
 
@@ -33,3 +47,22 @@ project.getSourceFiles().forEach(sourceFile => {
     }
 });
 
+console.log(mseDocument.toMSE());
+
+
+function addClassToMSE(clazz: ClassDeclaration, mseDocument: MSEDocument) {
+    const jsonObj = {
+                        "name": "Class", 
+                        "id": id++, 
+                        "attrs": [
+                            {
+                                "name": "name", 
+                                "vals": [
+                                    "'" + clazz.getName() + "'"
+                                ]
+                            }
+                        ] 
+                    };
+    let el: Element = new Element(jsonObj, famixPrefix);
+    mseDocument.addElement(el);
+}
