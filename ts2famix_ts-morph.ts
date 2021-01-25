@@ -1,5 +1,4 @@
 import { ClassDeclaration, Project } from "ts-morph";
-import { Element, MSEDocument } from "./src/MSEDocument";
 
 let id: number = 1;
 
@@ -7,16 +6,11 @@ const project = new Project();
 
 const famixPrefix = "Famix-Java-Entities";
 
-let mseDocument = new MSEDocument(null, famixPrefix);
-
-console.log(mseDocument.toMSE());
+let mseFile:string = '(\n';
 
 project.addSourceFilesAtPaths("sample-ts/**/*.ts");
 
 project.getSourceFiles().forEach(sourceFile => {
-    // sourceFile.forEachChild(node => {
-    //     console.log(node)
-    // });
 
     console.log('Source file: ' + sourceFile.getBaseName());
 
@@ -35,7 +29,7 @@ project.getSourceFiles().forEach(sourceFile => {
                     })
                 })
             }
-            addClassToMSE(clazz, mseDocument);
+            addClassToMSE(clazz, mseFile);
         });
     }
 
@@ -47,22 +41,13 @@ project.getSourceFiles().forEach(sourceFile => {
     }
 });
 
-console.log(mseDocument.toMSE());
+mseFile += ')';
 
+console.log('MSEFile: \n' + mseFile);
 
-function addClassToMSE(clazz: ClassDeclaration, mseDocument: MSEDocument) {
-    const jsonObj = {
-                        "name": "Class", 
-                        "id": id++, 
-                        "attrs": [
-                            {
-                                "name": "name", 
-                                "vals": [
-                                    "'" + clazz.getName() + "'"
-                                ]
-                            }
-                        ] 
-                    };
-    let el: Element = new Element(jsonObj, famixPrefix);
-    mseDocument.addElement(el);
+function addClassToMSE(clazz: ClassDeclaration, mseDocument: string) {
+    mseFile += "    (" + famixPrefix + ".Class (id: " + id++ + ")\n";
+    mseFile += "        (name: '" + clazz.getName() + "')";
+    // Does TypeContainer (from Java) make sense in TypeScript?
+    mseFile += ")\n";
 }
